@@ -1,0 +1,88 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% include "header.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="features-container">
+            <h2>Filters</h2>
+            <h3>Features</h3>
+            <div class="features-icon-container">
+                <div class="feature-icon-box">
+                    <a href=" {{ url_for('get_specific_cafes', q='has_wifi') }}">
+                        <lord-icon src="https://cdn.lordicon.com/yzctygpq.json" trigger="loop"
+                            colors="primary:#121331,secondary:#08a88a">
+                        </lord-icon>
+                        <p>WiFi</p>
+                    </a>
+                </div>
+                <div class="feature-icon-box">
+                    <a href=" {{ url_for('get_specific_cafes', q='has_sockets') }}">
+                        <img class="feature-icon" src="/static/images/plug.svg" width="32px" height="32px">
+                        <p>Sockets</p>
+                    </a>
+                </div>
+                <div class="feature-icon-box">
+                    <a href=" {{ url_for('get_specific_cafes', q='has_toilet') }}">
+                        <img class="feature-icon" src="/static/images/toilet.svg" width="32px" height="32px">
+                        <p>Toilets</p>
+                    </a>
+                </div>
+                <div class="feature-icon-box">
+                    <a href=" {{ url_for('get_specific_cafes', q='can_take_calls') }}">
+                        <img class="feature-icon" src="/static/images/call.svg" width="32px" height="32px">
+                        <p>Calls</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cafes-container">
+            {% if results %}
+                <p class="results-heading">Searching for cafes with '{{ query }}'</p>
+                <h2 class="sub-title"> {{ results | length }} Results: </h2>
+                {% for cafe in results: %}
+                    <div class="cafe">
+                        <a href="{{ url_for('show_cafe', cafe_id=cafe.id)}}">
+                            <div class="cafe-img">
+                                <img src="{{ cafe.img_url }}" width="100px" height="100px">
+                            </div>
+                            <div class="cafe-details">
+                                <h4>{{ cafe.name }}</h4>
+                                <p>{{ cafe.location }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h1 class="top-title">Cafe Website</h1>
+                <p>The best work and study-friendly cafes, restaurants, and hotel lobbies in London.
+                Find venues with free and reliable Wi-Fi hotspots, ample power sockets, and comfy seating areas.</p>
+                <h2 class="sub-title"> {{ cafes | length }} Work-Friendly Places </h2>
+                {% for cafe in cafes: %}
+                    <div class="cafe">
+                        <a href="{{ url_for('show_cafe', cafe_id=cafe.id)}}">
+                            <div class="cafe-img">
+                                <img src="{{ cafe.img_url }}" width="100px" height="100px">
+                            </div>
+                            <div class="cafe-details">
+                                <h4>{{ cafe.name }}</h4>
+                                <p>{{ cafe.location }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="maps-container">
+            <iframe id="custom-map" src="https://www.google.com/maps/d/u/0/embed?mid=1bGWEc0wFSvhMfr3b5HFWC0T4HWrPHHv8" width="640" height="100%"></iframe>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% include "footer.html" %}
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% if cafes %}
+            <title>{{ cafes | length }} Work-Friendly Places with Free-WiFi in London</title>
+        {% elif cafe_name %}
+            <title> {{ cafe_name }} </title>
+        {% else %}
+            <title> LaptopFriendly: Everyday Places to Work and Connect </title>
+        {% endif %}
+
+        <!--   Google Fonts     -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+        <!--   Custom Stylesheet     -->
+        <link rel="stylesheet" href="/static/styles/style.css">
+    </head>
+    <html>
+        <header>
+            <h1 class="header-title"><a href="{{ url_for('home') }}">Laptop Friendly Cafes</a></h1>
+            <a class="add-btn" href="{{ url_for('add_new_cafe') }}">
+                <button>Add</button>
+            </a>
+        </header>
+    </html>
