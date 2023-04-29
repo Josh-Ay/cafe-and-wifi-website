@@ -30,7 +30,7 @@ class Cafe(db.Model):
         return dictionary
 
 
-@app.get("/")
+@app.route("/")
 def home():
     all_cafes = Cafe.query.all()
 
@@ -63,7 +63,7 @@ def add_new_cafe():
     return render_template("add.html", form=form)
 
 
-@app.get("/cafes/cafe/<int:cafe_id>")
+@app.route("/cafes/cafe/<int:cafe_id>")
 def show_cafe(cafe_id):
     cafe_to_show = None
     all_cafes = [cafe.to_dict() for cafe in Cafe.query.all()]
@@ -74,7 +74,7 @@ def show_cafe(cafe_id):
     return render_template("cafe.html", cafe=cafe_to_show, cafe_name=cafe_to_show["name"])
 
 
-@app.get("/cafes/cafe")
+@app.route("/cafes/cafe")
 def get_specific_cafes():
     query_param = request.args.get("q")
     all_cafes = [cafe.to_dict() for cafe in Cafe.query.all()]
